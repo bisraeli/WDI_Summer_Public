@@ -8,6 +8,17 @@ require 'pry'
 # for colors in our terminal
 require 'rainbow'
 
+# helpers do
+#   def open_db(sql)
+#     PG.connect(:dbname => 'address_book', :host => 'localhost')
+#   end
+
+# def run_sql(sql)
+#   PG.connect(:dbname => 'address_book', :host => 'localhost')
+#   result = db.exec(sql)
+#   db.close
+#   result
+# end
 
 get '/' do
   # this prints to sinatra's server logs in terminal
@@ -37,17 +48,44 @@ post '/contacts' do
   redirect to '/contacts'
 end
 
+get '/contacts/:id/edit' do
+  id = params[:id]
+  db= PG.connect(:dbname => 'address_book', :host => 'localhost')
+  sql = "SELECT * FROM contacts where id = '#{id}'"
+  @contact = db.exec(sql).first
+  erb :edit
+end
+
 # Make a new contact
 get '/contacts/new' do
   erb :form
 end
 
 # show one specific contact
-get '/contacts/:name' do
-  @user_name = params[:name]
+get '/contacts/:id' do     # can simply put in id as instance variable instead of all table items)
+  id = params[:id]
   db = PG.connect(:dbname => 'address_book', :host => 'localhost')
-  sql = "SELECT * FROM contacts WHERE first = '#{@user_name}'"
+  sql = "SELECT * FROM contacts WHERE id = '#{id}'"
   @contact = db.exec(sql).first
   db.close
   erb :contact
 end
+
+post 'contacts/:id' do
+  id = params[:id]
+  first = params[:first]
+  last = params[:last]
+  age = params[:age]
+  db = PG.connect(:dbname => 'address_book', :host => 'localhost')
+  sql = "update contacts set (first, last, age) = ('#{first}','#{last}','#{age}') Where id = #{id}"
+  @contact = db.exec(sql).first
+  redirect to '/contacts'
+end
+
+
+
+
+
+
+
+

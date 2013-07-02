@@ -1,0 +1,24 @@
+Hashes and Symbols -- other data distinct from arrays
+
+we know in ruby we make a string like my name, which is "Ben" and we can assign that string to a variable.
+
+variable = "Ben"
+:Ben
+
+i might say
+name = : Ben   (never changes)   i might use this because it enables some optimizations inside of ruby.
+
+
+hash helps us name arguments we put into functions
+
+arrays refer to ways of storing data in little buckets
+
+r = [e1, e2, e3, e4]
+arr = [1] #takes me to element 2.
+
+Hashes
+
+data types indexed by an arbitrary value.
+
+
+
