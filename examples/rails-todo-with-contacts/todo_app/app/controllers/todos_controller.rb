@@ -1,10 +1,31 @@
 class TodosController < ApplicationController
 
+
+  def search
+    @todos = Todo.where(task: params[:task])
+    render "index"
+  end
+
+
+  def add_contact
+    todo = Todo.find(params[:id])
+    contact = Contact.find(params[:contact_id])
+    todo.contacts << contact
+    redirect_to todo
+  end
+
   def index
     @todos = Todo.all
   end
 
   def new
+  end
+
+  def delete_contact
+    contact = Contact.find(params[:contact_id])
+    todo = Todo.find(params[:id])
+    todo.contacts.destroy(contact)
+    redirect_to todo
   end
 
   def create
@@ -21,6 +42,8 @@ class TodosController < ApplicationController
 
   def show
     @todo = Todo.find(params[:id])
+    all_contacts = Contact.all
+    @available_contacts = all_contacts - @todo.contacts
   end
 
   def edit
