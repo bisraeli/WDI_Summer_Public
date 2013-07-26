@@ -1,14 +1,40 @@
+// Underscore:
+// each(list, iterator, [context])
+// What arguments does iterator take?
+// iterator: a function
+// Each invocation of iterator is 
+// called with three arguments: 
+// (element, index, list). 
+// map
+// find 
+
+
 function handleStudents(){
   var i = 0;  // scope: local variable, type: number
   var students = ['Jim', 'Bob', 'Tracy', 'Justin', 'Emily'];  // s: local, t:???
-  return function(){  // from SO: the inner function has access to the 
-    // environment it was created within 
-    // even after the code that created the environment has returned.
-    var student =  students[i]; // s: ???, t: string
-    i+=1; 
-    return student;// What type is this returning? 
+  return function(){ 
+    _.reduce(students, 
+      // iterator funciton
+        function(memo, student) {
+          console.log('student: ' + student);
+          memo += ' ' + student;
+          console.log('memo: ' + memo);
+          return memo;
+        }, 
+        ''
+    );
+  // return function(){ 
+  //   _.each(students, 
+  //     // iterator funciton
+  //       function(student, index, list) {
+  //         console.log(index + ' ' + student);
+  //         console.log(list[index]);
+  //       }
+  //   );
   };
 }
+
+
 
 // What type of variable is nextStudent?
 // t: ???
