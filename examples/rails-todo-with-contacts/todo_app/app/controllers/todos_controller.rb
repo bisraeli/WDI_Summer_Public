@@ -1,21 +1,55 @@
 class TodosController < ApplicationController
 
 
+<<<<<<< HEAD
+=======
+  # GET
+  # /todos/search
+  # todos_search path
+>>>>>>> upstream/master
   def search
     @todos = Todo.where(task: params[:task])
     render "index"
   end
 
+<<<<<<< HEAD
 
   def add_contact
     todo = Todo.find(params[:id])
     contact = Contact.find(params[:contact_id])
     todo.contacts << contact
+=======
+  # POST
+  # /todos/:id/add_contact
+  # add_todo_contact_path for linking
+  def add_contact
+    todo = Todo.find(params[:id])
+    # SELECT * FROM TODOS WHERE id = params[:id]
+
+    contact = Contact.find(params[:contact_id])
+    # SELECT * FROM CONTACTS WHERE id = params[:contact_id]
+    todo.contacts << contact
+
+    redirect_to todo
+  end
+
+  # POST
+  # /todos/:id/remove_contact
+  # remove_todo_contact_path for linking
+  def remove_contact
+    contact = Contact.find params[:contact_id]
+    todo = Todo.find params[:id]
+    todo.contacts.destroy(contact)
+>>>>>>> upstream/master
     redirect_to todo
   end
 
   def index
-    @todos = Todo.all
+    if params[:task]
+      @todos = Todo.where(task: params[:task])
+    else
+      @todos = Todo.all
+    end
   end
 
   def new
