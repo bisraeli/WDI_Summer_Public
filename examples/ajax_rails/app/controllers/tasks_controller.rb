@@ -1,8 +1,32 @@
 class TasksController < ApplicationController
 	# STEP 3: Create the following TasksController actions:
+	respond_to :html, only: [:index]
+	respond_to :json, only: [:index, :create]
+	respond_to :js, only: [:complete, :destroy]
+
+	def index
+		respond_to do |format|
+			format.json { render json: Task.all.to_json }
+			format.html
+		end
+	end
 	# index - respond to html & json
+
+	def create
+		render json: Task.create!(params[:task]).to_json
+	end
 	# create - respond to json
+
+	def complete
+		@task = Task.find(params[:id])
+		@task.complete = true
+		@task.save!
+	end
 	# complete - respond to js
+
+	def destroy
+		Task.find(params[:id]).destroy
+	end
 	# destroy - respond to js
 
 	# STEP 8: Make the index action respond to json requests with json containing the array from `Task.all`

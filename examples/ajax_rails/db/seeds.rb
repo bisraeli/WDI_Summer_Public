@@ -7,3 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # STEP 6: Create basic seed data for a 5 tasks here
+
+Task.create(name: "wash dishes")
+Task.create(name: "learn more ruby")
+Task.create(name: "practice differential equations")
+Task.create(name: "practice take5")
