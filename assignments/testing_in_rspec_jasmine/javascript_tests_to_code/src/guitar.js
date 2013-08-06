@@ -7,17 +7,35 @@ if (typeof Object.create !== 'function') {
 }
 
 var guitar = {
-  test_guitar = Object.create(guitar);
-  numberOfStrings = 6
-  var breakString = function(numberOfStrings){
-    numberOfStrings - 1
-  }
-  var playbasicRhythm = function(){
-    console.log("jug jigga jug jigga jug")
-  }
-  var playhighstrings = function(){
-    console.log("meedley meedley meedley meedley meedley meedley meedley meedley meedley meedley meedley meedley MEEEEEEEEEEEEEEEE. \'And the dragon comes in the NIIIiiiiIIIiiiiIIIIIIIIiiiiiiiiiiiIIIIIIIIiiiIIGGHH\')
-  }
+   name: "Fender Esquire",
+   numberOfStrings: 6,
+   volume: 5,
+   setName: function(name) {
+    this.name = "Fender Jazzmaster"
+   },
+   breakString: function(numberOfStrings){
+    if(this.numberOfStrings){
+      this.numberOfStrings-= 1
+    };
+      if(this.numberOfStrings === 0) {
+        this.volume = 0;
+      };
+   },
+   playRock: function(numberOfStrings){
+    if(this.numberOfStrings > 0) {
+      this.volume = 11;
+    }
+   },
+   restring: function(){
+    this.numberOfStrings = 6;
+    this.volume = 5;
+   },
+   playBasicRhythm: function(){
+     return "jug jigga jug jigga jug";
+   },
+   playHighStrings: function(){
+     return "meedley meedley meedley meedley meedley meedley meedley meedley meedley meedley meedley meedley MEEEEEEEEEEEEEEEE. \'And the dragon comes in the NIIIiiiiIIIiiiiIIIIIIIIiiiiiiiiiiiIIIIIIIIiiiIIGGHH\'";
+   },
 
 
 };
