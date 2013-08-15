@@ -19,7 +19,7 @@ class TasksController < ApplicationController
 
 	def complete
 		@task = Task.find(params[:id])
-		@task.complete = true
+		@task.completed = true
 		@task.save!
 	end
 	# complete - respond to js
